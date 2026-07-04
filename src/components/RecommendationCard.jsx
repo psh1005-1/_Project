@@ -1,5 +1,6 @@
 import { useState } from 'react'
 import { formatPercentage, scoreToBadgeColor, scoreToBarColor, scoreToLabel } from '../utils/scoreFormatter'
+import { isPolicyExpired } from '../services/policyMatcher'
 
 export default function RecommendationCard({ company, rank }) {
   const [expanded, setExpanded] = useState(false)
@@ -89,6 +90,53 @@ export default function RecommendationCard({ company, rank }) {
               ))}
             </ul>
           </div>
+
+          {company.policies?.length > 0 && (
+            <div>
+              <p className="text-xs font-bold text-brand-navy">관련 청년 지원정책</p>
+              <div className="mt-2 space-y-2">
+                {company.policies.map((policy) => {
+                  const expired = isPolicyExpired(policy)
+                  return (
+                    <div key={policy.id} className="rounded-lg border border-slate-200 bg-white p-3">
+                      <div className="flex items-start justify-between gap-2">
+                        <p className="text-xs font-semibold text-brand-navy sm:text-sm">{policy.name}</p>
+                        <span
+                          className={`shrink-0 rounded-full px-2 py-0.5 text-[10px] font-bold ${
+                            expired ? 'bg-slate-100 text-slate-400' : 'bg-emerald-50 text-emerald-600'
+                          }`}
+                        >
+                          {expired ? '마감' : policy.deadline ? `~${policy.deadline}` : '상시 모집'}
+                        </span>
+                      </div>
+                      <p className="mt-1 text-xs leading-relaxed text-slate-600">{policy.description}</p>
+                      <p className="mt-1.5 text-[11px] text-slate-400">
+                        대상: 만 {policy.targetAgeMin}~{policy.targetAgeMax}세 · {policy.targetEmploymentStatus}
+                      </p>
+                      {expired ? (
+                        <button
+                          type="button"
+                          disabled
+                          className="mt-2 w-full cursor-not-allowed rounded-full bg-slate-100 py-2 text-xs font-semibold text-slate-400"
+                        >
+                          신청 마감
+                        </button>
+                      ) : (
+                        <a
+                          href={policy.applicationUrl}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          className="mt-2 flex items-center justify-center rounded-full bg-brand-primary py-2 text-xs font-semibold text-white transition-colors hover:bg-blue-700"
+                        >
+                          신청하기
+                        </a>
+                      )}
+                    </div>
+                  )
+                })}
+              </div>
+            </div>
+          )}
 
           <div>
             <p className="text-xs font-bold text-brand-navy">근거 문서 (source chunks)</p>

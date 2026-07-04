@@ -1,5 +1,5 @@
 import { forwardRef, useImperativeHandle, useState } from 'react'
-import { SectionHeading } from './PipelineSection'
+import { SectionHeading } from './SectionHeading'
 
 export const INDUSTRY_OPTIONS = [
   '핀테크',

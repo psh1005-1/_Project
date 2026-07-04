@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { SectionHeading } from './PipelineSection'
+import { SectionHeading } from './SectionHeading'
 import RecommendationCard from './RecommendationCard'
 import EmojiBurst from './EmojiBurst'
 
@@ -53,16 +53,44 @@ function EmptyState() {
 
 function LoadingState() {
   return (
-    <div className="mx-auto flex max-w-md flex-col items-center rounded-2xl border border-blue-100 bg-white px-6 py-16 text-center shadow-sm">
-      <div className="flex h-14 w-14 items-center justify-center rounded-full bg-blue-50">
-        <div className="h-7 w-7 animate-spin rounded-full border-[3px] border-brand-primary border-t-transparent" />
+    <div>
+      <div className="mx-auto flex max-w-md flex-col items-center text-center">
+        <div className="flex h-10 w-10 items-center justify-center rounded-full bg-blue-50">
+          <div className="h-5 w-5 animate-spin rounded-full border-[3px] border-brand-primary border-t-transparent" />
+        </div>
+        <p className="mt-3 text-sm font-semibold text-brand-navy sm:text-base">
+          기업 데이터를 검색하고 있어요…
+        </p>
+        <p className="mt-1 text-xs text-slate-500 sm:text-sm">
+          벡터 DB에서 유사 기업을 찾고, AI가 추천 이유를 생성하는 중이에요.
+        </p>
       </div>
-      <p className="mt-4 text-sm font-semibold text-brand-navy sm:text-base">
-        기업 데이터를 검색하고 있어요…
-      </p>
-      <p className="mt-1.5 text-xs text-slate-500 sm:text-sm">
-        벡터 DB에서 유사 기업을 찾고, AI가 추천 이유를 생성하는 중이에요.
-      </p>
+
+      <div className="mt-8 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        {Array.from({ length: 3 }, (_, i) => (
+          <SkeletonCard key={i} />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+function SkeletonCard() {
+  return (
+    <div className="animate-pulse rounded-2xl border border-blue-100 bg-white p-6">
+      <div className="flex items-center gap-3">
+        <div className="h-9 w-9 shrink-0 rounded-full bg-slate-200" />
+        <div className="flex-1 space-y-2">
+          <div className="h-4 w-2/3 rounded bg-slate-200" />
+          <div className="h-3 w-1/2 rounded bg-slate-100" />
+        </div>
+      </div>
+      <div className="mt-4 flex gap-1.5">
+        <div className="h-5 w-16 rounded-full bg-slate-100" />
+        <div className="h-5 w-20 rounded-full bg-slate-100" />
+      </div>
+      <div className="mt-5 h-2 w-full rounded-full bg-slate-100" />
+      <div className="mt-5 h-9 w-full rounded-full bg-slate-100" />
     </div>
   )
 }

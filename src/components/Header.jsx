@@ -5,7 +5,6 @@ const NAV_LINKS = [
   { label: '홈', to: '/', isPage: true },
   { label: '추천받기', to: '/#profile-form' },
   { label: '기업 탐색', to: '/#recommendation-results' },
-  { label: '활용된 기술', to: '/tech', isPage: true },
   { label: '마이페이지', comingSoon: true },
 ]
 

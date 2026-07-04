@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import { Link } from 'react-router-dom'
 import floatingPerson2Img from '../assets/floating-person-2.png'
 import floatingPerson3Img from '../assets/floating-person-3.png'
 
@@ -79,19 +78,13 @@ export default function HeroSection({ onQuickSearch, isLoading }) {
             AI가 당신의 관심사와 역량을 분석해 최적의 기업을 찾아드려요.
           </p>
 
-          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+          <div className="mt-9">
             <a
               href="#quick-search"
               className="rounded-full bg-brand-primary px-8 py-3.5 text-sm font-semibold text-white shadow-lg shadow-blue-200 transition-transform hover:scale-105 hover:bg-blue-700"
             >
               내 기업 추천받기
             </a>
-            <Link
-              to="/tech"
-              className="rounded-full border border-blue-200 bg-white px-8 py-3.5 text-sm font-semibold text-brand-primary transition-colors hover:bg-blue-50"
-            >
-              활용 기술 보기
-            </Link>
           </div>
         </div>
 

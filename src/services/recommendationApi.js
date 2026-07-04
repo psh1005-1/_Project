@@ -9,6 +9,7 @@
 
 import { mockCompanies } from '../data/mockCompanies'
 import { clampScore, PRIORITY_WEIGHTS } from '../utils/scoreFormatter'
+import { getMatchingPolicies } from './policyMatcher'
 
 const SIMULATED_LATENCY_MS = 1100
 
@@ -112,6 +113,7 @@ export function getRecommendations(userProfile, topK = 5) {
           matchScore: finalScore,
           matchingKeywords,
           reasons,
+          policies: getMatchingPolicies(company),
         }
       })
 
